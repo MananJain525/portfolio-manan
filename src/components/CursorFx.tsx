@@ -7,6 +7,7 @@ export function CursorFx() {
   const ringRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
+    if (window.innerWidth < 768) return; // no custom cursor on touch/mobile
     const dot  = dotRef.current;
     const ring = ringRef.current;
     if (!dot || !ring) return;

@@ -44,11 +44,6 @@ export function Hero() {
         <div className="hero-text">
           <div className="eyebrow">
             <span>{eyebrow.school}</span>
-            <span className="eyebrow-sep" aria-hidden="true">·</span>
-            <span className="eyebrow-avail">
-              <span className="pulse" aria-hidden="true" />
-              {eyebrow.availability}
-            </span>
           </div>
 
           <h1 className="display">
@@ -65,20 +60,9 @@ export function Hero() {
           <p className="hero-bio">{bio}</p>
 
           <div className="hero-actions-bottom">
-            <div className="row">
-              <a href="#work" className="btn btn-primary" data-cursor-hover>
-                View Work <span aria-hidden="true">→</span>
-              </a>
-              <a
-                href="https://github.com/mananjain"
-                target="_blank"
-                rel="noreferrer"
-                className="btn btn-ghost"
-                data-cursor-hover
-              >
-                GitHub <span aria-hidden="true">↗</span>
-              </a>
-            </div>
+            <a href="#contact" className="btn btn-primary" data-cursor-hover>
+              Hire Me <span aria-hidden="true">→</span>
+            </a>
             <div className="hint">Click to interact · Scroll to explore</div>
           </div>
         </div>

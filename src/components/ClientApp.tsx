@@ -10,6 +10,7 @@ import { Contact } from './Contact';
 import { FootNav } from './FootNav';
 import { Topbar } from './Topbar';
 import { CursorFx } from './CursorFx';
+import { CliPhantom } from './CliPhantom';
 import { useTheme } from './ThemeProvider';
 import { portfolio } from '@/data/portfolio';
 import type { Project } from '@/data/portfolio';
@@ -59,6 +60,8 @@ export function ClientApp() {
         project={activeProject}
         onClose={() => setActiveProject(null)}
       />
+
+      <CliPhantom />
     </>
   );
 }

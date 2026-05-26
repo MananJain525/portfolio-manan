@@ -14,11 +14,14 @@ export function HeroCanvas({ hostRef }: HeroCanvasProps) {
     const host = hostRef.current;
     if (!canvas || !host) return;
 
+    if (typeof window === 'undefined') return;
+
     const ctx = canvas.getContext('2d')!;
     const DPR = Math.min(window.devicePixelRatio || 1, 2);
     let W = 0, H = 0;
     let running = true;
     let visible = true;
+    let tabVisible = document.visibilityState !== 'hidden';
     let rafId: number | null = null;
 
     // ── Resize ────────────────────────────────────────────────
@@ -143,7 +146,7 @@ export function HeroCanvas({ hostRef }: HeroCanvasProps) {
 
     // ── Flow particles ────────────────────────────────────────
     const FLOW: Particle[] = [];
-    const FLOW_TARGET = 380;
+    const FLOW_TARGET = window.innerWidth < 768 ? 95 : 380; // 25% on mobile
     let zT = 0;
     function seedFlow(p: Particle) {
       p.x = Math.random() * W; p.y = Math.random() * H;
@@ -200,9 +203,19 @@ export function HeroCanvas({ hostRef }: HeroCanvasProps) {
     host.addEventListener('touchstart', onTouchMove, { passive: true });
     host.addEventListener('touchmove', onTouchMove, { passive: true });
 
+    // ── Page visibility ───────────────────────────────────────
+    function onVisibility() {
+      tabVisible = document.visibilityState !== 'hidden';
+      if (tabVisible && visible && running && !rafId) {
+        rafId = requestAnimationFrame(tick);
+      }
+    }
+    document.addEventListener('visibilitychange', onVisibility);
+
     // ── Main loop ─────────────────────────────────────────────
     function tick() {
       if (!running) return;
+      if (!tabVisible) { rafId = null; return; } // fully stop when tab hidden
       rafId = requestAnimationFrame(tick);
       if (!visible) return;
 
@@ -278,7 +291,8 @@ export function HeroCanvas({ hostRef }: HeroCanvasProps) {
 
     return () => {
       running = false;
-      if (rafId) cancelAnimationFrame(rafId);
+      if (rafId !== null) { cancelAnimationFrame(rafId); rafId = null; }
+      document.removeEventListener('visibilitychange', onVisibility);
       window.removeEventListener('resize', onResize);
       host.removeEventListener('mousemove', onMouseMove);
       host.removeEventListener('touchstart', onTouchMove);

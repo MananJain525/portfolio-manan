@@ -70,7 +70,7 @@ export const portfolio = {
       ],
     },
     github: {
-      handle: '@mananjain',
+      handle: '@MananJain525',
       period: '2025–26',
     },
     skills: [
@@ -215,8 +215,8 @@ export const portfolio = {
     email: 'mananjaingadiya@gmail.com',
     location: 'Goa, India · UTC+5:30',
     socials: {
-      github: 'https://github.com/mananjain',
-      linkedin: 'https://linkedin.com/in/mananjain',
+      github: 'https://github.com/MananJain525',
+      linkedin: 'https://www.linkedin.com/in/mananjain-/',
       twitter: 'https://twitter.com/mananjain',
     },
     formNote: 'Replies within ~48h',

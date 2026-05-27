@@ -106,6 +106,7 @@ section:first-of-type { border-top: 0 }
   box-shadow: 0 0 0 4px color-mix(in srgb, var(--accent) 20%, transparent);
 }
 .topbar nav a { color: var(--muted); text-decoration: none; margin-left: 18px; transition: color 0.2s }
+.topbar-icon-link { display: inline-flex; align-items: center; justify-content: center }
 
 /* ─── Buttons ────────────────────────────────────────────────── */
 .btn {
@@ -431,56 +432,41 @@ body[data-dark='true'] .glass-panel { background: color-mix(in srgb, var(--card)
   color: var(--muted); text-align: right; text-transform: uppercase; white-space: nowrap;
 }
 
-/* ─── GitHub contribution grid ───────────────────────────────── */
-.gh-body { display: flex; gap: 6px; align-items: flex-start; min-width: 0 }
-.gh-days {
-  display: grid; grid-template-rows: repeat(7, 1fr); row-gap: 2px;
-  font-family: var(--mono); font-size: 9.5px; letter-spacing: 0.06em;
-  color: var(--muted); text-transform: uppercase;
-  width: 22px; padding-top: 2px;
+/* ─── GitHub 60-day grid ─────────────────────────────────────── */
+.gh60-head {
+  display: flex; align-items: center; justify-content: space-between;
+  gap: 12px; margin-bottom: 14px;
 }
-.gh-days span:nth-child(1) { grid-row: 2 }
-.gh-days span:nth-child(2) { grid-row: 4 }
-.gh-days span:nth-child(3) { grid-row: 6 }
-.gh-grid {
-  flex: 1; min-width: 0;
-  display: grid; grid-template-rows: repeat(7, 1fr);
-  grid-auto-flow: column; grid-auto-columns: 1fr;
-  gap: 2px; aspect-ratio: 52 / 7;
+.gh60-label {
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.16em;
+  text-transform: uppercase; color: var(--muted);
 }
-.gh-cell {
-  border-radius: 2px;
-  background: color-mix(in srgb, var(--accent) 18%, transparent);
-  border: 1px solid color-mix(in srgb, var(--accent) 16%, transparent);
-  transition: transform 0.12s, background 0.25s, border-color 0.25s;
+.gh60-link {
+  display: inline-flex; align-items: center; gap: 5px;
+  font-family: var(--mono); font-size: 10.5px; letter-spacing: 0.06em;
+  color: var(--muted); text-decoration: none;
+  transition: color 0.22s;
 }
-body[data-dark='true'] .gh-cell {
-  background: color-mix(in srgb, #ffffff 7%, transparent);
-  border-color: color-mix(in srgb, #ffffff 9%, transparent);
+@media (hover: hover) { .gh60-link:hover { color: var(--fg) } }
+.gh60-link svg { flex-shrink: 0 }
+.gh60-grid {
+  display: grid;
+  grid-template-rows: repeat(4, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: 1fr;
+  gap: 4px;
+  aspect-ratio: 15 / 4;
 }
-body[data-dark='true'] .gh-cell[data-lvl='1'] { background: color-mix(in srgb, var(--accent) 42%, transparent); border-color: color-mix(in srgb, var(--accent) 48%, transparent) }
-body[data-dark='true'] .gh-cell[data-lvl='2'] { background: color-mix(in srgb, var(--accent) 62%, transparent); border-color: color-mix(in srgb, var(--accent) 68%, transparent) }
-body[data-dark='true'] .gh-cell[data-lvl='3'] { background: color-mix(in srgb, var(--accent) 82%, transparent); border-color: color-mix(in srgb, var(--accent) 86%, transparent); box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 55%, transparent) }
-body[data-dark='true'] .gh-cell[data-lvl='4'] { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 16px color-mix(in srgb, var(--accent) 35%, transparent) }
-.gh-cell[data-lvl='1'] { background: color-mix(in srgb, var(--accent) 38%, transparent); border-color: color-mix(in srgb, var(--accent) 40%, transparent) }
-.gh-cell[data-lvl='2'] { background: color-mix(in srgb, var(--accent) 58%, transparent); border-color: color-mix(in srgb, var(--accent) 62%, transparent) }
-.gh-cell[data-lvl='3'] { background: color-mix(in srgb, var(--accent) 80%, transparent); border-color: color-mix(in srgb, var(--accent) 86%, transparent) }
-.gh-cell[data-lvl='4'] { background: var(--accent); border-color: var(--accent); box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 55%, transparent) }
-@media (hover: hover) { .gh-cell:hover { transform: scale(1.4); z-index: 2 } }
-
-.gh-months {
-  display: grid; grid-template-columns: repeat(52, 1fr);
-  column-gap: 2px; font-family: var(--mono); font-size: 9.5px;
-  letter-spacing: 0.08em; text-transform: uppercase; color: var(--muted);
-  margin: 0 0 6px 28px;
+.gh60-cell {
+  border-radius: 3px;
+  background: #262626;
+  transition: transform 0.12s, opacity 0.12s;
 }
-.gh-months span { grid-row: 1 }
-.gh-legend {
-  display: flex; align-items: center; justify-content: flex-end; gap: 5px;
-  margin-top: 12px;
-  font-family: var(--mono); font-size: 10px; letter-spacing: 0.08em; color: var(--muted); text-transform: uppercase;
-}
-.gh-legend .gh-cell { width: 9px; height: 9px; border-radius: 2px }
+.gh60-cell[data-lvl='1'] { background: #5c2d16 }
+.gh60-cell[data-lvl='2'] { background: #8a421c }
+.gh60-cell[data-lvl='3'],
+.gh60-cell[data-lvl='4'] { background: #f97316; box-shadow: 0 0 6px rgba(249,115,22,0.45) }
+@media (hover: hover) { .gh60-cell:hover { transform: scale(1.3); opacity: 0.9; z-index: 2 } }
 
 /* ─── Skill pills ────────────────────────────────────────────── */
 .skills-pills { display: flex; flex-wrap: wrap; gap: 8px }
@@ -815,8 +801,7 @@ body[data-dark='true'] .footnav {
 /* ─── Mobile layout stacking ─────────────────────────────────── */
 @media (max-width: 768px) {
   .topbar nav { display: none }
-  .footnav { padding: 8px 12px; gap: 10px; font-size: 9.5px }
-  .footnav .loc { display: none }
+  .footnav { display: none }
 
   /* Phase 2: hide custom cursor, restore system pointer */
   .cursor-dot, .cursor-ring { display: none !important }
@@ -968,11 +953,76 @@ body[data-dark='true'] .cli-pill {
 }
 .cli-form input::placeholder { color: var(--muted) }
 @media (max-width: 780px) {
-  .cli-root { right: 1rem; bottom: 1rem }
-  .cli-root.is-idle .cli-pill { width: min(220px, calc(100vw - 2rem)) }
-  .cli-root.is-open .cli-pill { width: min(320px, calc(100vw - 2rem)); height: 280px }
+  /* Hide pill trigger on mobile — MobileFab opens the CLI instead */
+  .cli-root:not(.is-open) .cli-pill { display: none }
+  .cli-root.is-open .cli-pill {
+    right: 1rem; bottom: 1rem; left: auto;
+    width: min(320px, calc(100vw - 2rem)); height: 280px;
+  }
 }
 @media (prefers-reduced-motion: reduce) {
   .cli-pill, .cli-term { transition: none }
   .cli-blink { animation: none }
+}
+
+/* ─── Mobile FAB nav ─────────────────────────────────────────── */
+.mob-fab-root {
+  display: none;
+  position: fixed;
+  bottom: 20px;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 60;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+}
+@media (max-width: 768px) { .mob-fab-root { display: flex } }
+
+.mob-fab-menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 7px;
+  margin-bottom: 2px;
+}
+.mob-fab-item {
+  display: flex; align-items: center; justify-content: center;
+  min-width: 108px; padding: 9px 22px; border-radius: 999px;
+  background: color-mix(in srgb, var(--bg) 80%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--rule));
+  font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
+  text-transform: uppercase; color: var(--muted);
+  text-decoration: none; cursor: pointer; appearance: none;
+  transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+}
+.mob-fab-item.is-active {
+  color: var(--fg); border-color: var(--accent);
+  background: color-mix(in srgb, var(--accent) 10%, transparent);
+  box-shadow: 0 0 12px -4px color-mix(in srgb, var(--accent) 50%, transparent);
+}
+
+.mob-fab-btn {
+  position: relative;
+  width: 46px; height: 46px; border-radius: 999px;
+  display: flex; align-items: center; justify-content: center;
+  background: color-mix(in srgb, var(--bg) 78%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(160%);
+  backdrop-filter: blur(14px) saturate(160%);
+  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--rule));
+  color: var(--fg); font-size: 20px; cursor: pointer; appearance: none;
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.14),
+    0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent),
+    0 0 22px -6px color-mix(in srgb, var(--accent) 55%, transparent);
+  transition: border-color 0.2s, box-shadow 0.3s;
+}
+.mob-fab-btn.is-open {
+  border-color: color-mix(in srgb, var(--accent) 52%, var(--rule));
+  box-shadow:
+    0 8px 24px rgba(0, 0, 0, 0.18),
+    0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent),
+    0 0 28px -4px color-mix(in srgb, var(--accent) 65%, transparent);
 }

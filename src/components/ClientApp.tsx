@@ -11,6 +11,7 @@ import { FootNav } from './FootNav';
 import { Topbar } from './Topbar';
 import { CursorFx } from './CursorFx';
 import { CliPhantom } from './CliPhantom';
+import { MobileFab } from './MobileFab';
 import { useTheme } from './ThemeProvider';
 import { portfolio } from '@/data/portfolio';
 import type { Project } from '@/data/portfolio';
@@ -37,7 +38,7 @@ export function ClientApp() {
           borderTop: '1px solid var(--rule)',
           padding: '40px 0',
           display: 'flex',
-          justifyContent: 'space-between',
+          justifyContent: 'flex-start',
           alignItems: 'center',
           fontFamily: 'var(--mono)',
           fontSize: 11,
@@ -46,7 +47,6 @@ export function ClientApp() {
           color: 'var(--muted)',
         }}>
           <span>{portfolio.footer.copyright}</span>
-          <span>{portfolio.footer.tagline}</span>
         </section>
       </main>
 
@@ -55,6 +55,8 @@ export function ClientApp() {
         onToggleDark={toggleDark}
         active={activeSection}
       />
+
+      <MobileFab active={activeSection} />
 
       <ProjectModal
         project={activeProject}

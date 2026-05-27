@@ -97,13 +97,18 @@ export function CliPhantom() {
     };
   }, [armIdle]);
 
-  // Escape closes modal
+  // Escape closes; 'cli-open' custom event (from MobileFab) opens
   useEffect(() => {
     function onKey(e: KeyboardEvent) {
       if (e.key === 'Escape' && openRef.current) handleClose();
     }
+    function onCliOpen() { handleOpen(); }
     window.addEventListener('keydown', onKey);
-    return () => window.removeEventListener('keydown', onKey);
+    window.addEventListener('cli-open', onCliOpen);
+    return () => {
+      window.removeEventListener('keydown', onKey);
+      window.removeEventListener('cli-open', onCliOpen);
+    };
   // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 

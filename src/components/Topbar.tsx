@@ -19,10 +19,6 @@ function LinkedinIcon({ size = 15 }: { size?: number }) {
 export function Topbar() {
   return (
     <header className="topbar">
-      <div className="brand">
-        <span className="dot" aria-hidden="true" />
-        MJ
-      </div>
       <nav>
         <a
           href="https://github.com/MananJain525"

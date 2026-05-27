@@ -208,7 +208,7 @@ body[data-dark='true'] .eyebrow .eyebrow-avail .pulse { background: #a3e635 }
 /* ─── Display name ───────────────────────────────────────────── */
 .display {
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(46px, 6.5vw, 88px);
+  font-size: clamp(60px, 8.5vw, 114px);
   line-height: 0.85; letter-spacing: -0.025em;
   margin: 24px 0 0;
   white-space: nowrap;
@@ -220,10 +220,11 @@ body[data-dark='true'] .eyebrow .eyebrow-avail .pulse { background: #a3e635 }
 
 /* ─── Tagline ─────────────────────────────────────────────────── */
 .tagline {
-  font-family: var(--serif-it); font-style: italic; font-weight: 400;
-  font-size: clamp(22px, 3.2vw, 48px); line-height: 1.1; letter-spacing: -0.01em;
+  font-family: var(--serif-it); font-style: italic; font-weight: 500;
+  font-size: clamp(26px, 3.8vw, 56px); line-height: 1.1; letter-spacing: -0.01em;
   margin: 28px 0 0; color: var(--fg);
 }
+body[data-dark='true'] .tagline { color: #ffffff; }
 .tagline .ink { color: var(--accent); font-style: italic }
 .tagline .cursor {
   display: inline-block; width: 0.05em; height: 0.95em;
@@ -251,9 +252,9 @@ body:not([data-dark='true']) .hero-bio { color: rgba(17, 17, 17, 0.75) }
   display: grid;
   grid-template-columns: 1.1fr 1fr;
   grid-template-areas: "text cards";
-  align-items: center;
+  align-items: start;
   gap: clamp(32px, 4vw, 56px);
-  padding-top: clamp(14px, 2dvh, 28px);
+  padding-top: clamp(4px, 0.5dvh, 8px);
   padding-bottom: clamp(28px, 4dvh, 56px);
 }
 .hero-text { grid-area: text }
@@ -262,17 +263,18 @@ body:not([data-dark='true']) .hero-bio { color: rgba(17, 17, 17, 0.75) }
 .sc-wrapper {
   grid-area: cards;
   position: relative;
-  width: 368px;
-  height: 280px;
+  width: 424px;
+  height: 322px;
   overflow: visible;
-  align-self: center;
+  align-self: start;
   justify-self: center;
+  margin-top: 40px;
 }
 .sc-card {
   position: absolute;
   top: 0; left: 0;
-  width: 338px;
-  height: 248px;
+  width: 390px;
+  height: 285px;
   border-radius: 14px;
   border: 1px solid color-mix(in srgb, var(--accent) 24%, transparent);
   background: color-mix(in srgb, var(--bg) 82%, transparent);
@@ -838,8 +840,12 @@ body[data-dark='true'] .footnav {
     min-height: 85svh;
     display: flex;
     flex-direction: column;
-    justify-content: center;
+    justify-content: space-evenly;
   }
+  .hero-text .display,
+  .hero-text .tagline,
+  .hero-text .hero-bio,
+  .hero-text .hero-actions-bottom { margin-top: 0; }
   .sc-wrapper { justify-self: center }
 
   /* About grid stacks */

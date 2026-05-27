@@ -2,6 +2,7 @@
 
 import { useState } from 'react';
 import { portfolio } from '@/data/portfolio';
+import { sendEmail } from '@/actions/sendEmail';
 
 const { contact } = portfolio;
 
@@ -9,11 +10,15 @@ export function Contact() {
   const [form, setForm] = useState({ name: '', email: '', message: '' });
   const [errors, setErrors] = useState<Record<string, string | null>>({});
   const [sent, setSent] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState<string | null>(null);
 
   const set = (k: keyof typeof form) => (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
     setForm({ ...form, [k]: e.target.value });
     setErrors({ ...errors, [k]: null });
+    setServerError(null);
   };
+
   const validate = () => {
     const e: Record<string, string> = {};
     if (!form.name.trim()) e.name = 'Tell me your name';
@@ -22,13 +27,28 @@ export function Contact() {
     if (form.message.trim().length < 10) e.message = 'Give me a bit more (10+ chars)';
     return e;
   };
-  const onSubmit = (ev: React.FormEvent) => {
+
+  const onSubmit = async (ev: React.FormEvent) => {
     ev.preventDefault();
     const e = validate();
     setErrors(e);
-    if (!Object.keys(e).length) {
+    if (Object.keys(e).length) return;
+
+    setSending(true);
+    setServerError(null);
+
+    const result = await sendEmail(form);
+
+    setSending(false);
+
+    if (result.status === 'success') {
       setSent(true);
-      setTimeout(() => { setSent(false); setForm({ name: '', email: '', message: '' }); }, 3200);
+      setTimeout(() => {
+        setSent(false);
+        setForm({ name: '', email: '', message: '' });
+      }, 3200);
+    } else {
+      setServerError(result.message);
     }
   };
 
@@ -93,26 +113,28 @@ export function Contact() {
           <form className="ide-form" onSubmit={onSubmit} noValidate>
             <label className={`field ${errors.name ? 'error' : ''}`}>
               <span className="ide-key">const name <span className="ide-op">=</span></span>
-              <input value={form.name} onChange={set('name')} placeholder='"Your name"' />
+              <input value={form.name} onChange={set('name')} placeholder='"Your name"' disabled={sending} />
               <span className="err">{errors.name || ''}</span>
             </label>
             <label className={`field ${errors.email ? 'error' : ''}`}>
               <span className="ide-key">const email <span className="ide-op">=</span></span>
-              <input value={form.email} onChange={set('email')} placeholder='"you@studio.com"' type="email" />
+              <input value={form.email} onChange={set('email')} placeholder='"you@studio.com"' type="email" disabled={sending} />
               <span className="err">{errors.email || ''}</span>
             </label>
             <label className={`field ${errors.message ? 'error' : ''}`}>
               <span className="ide-key">const message <span className="ide-op">=</span></span>
-              <textarea value={form.message} onChange={set('message')} placeholder='"Tell me about it…"' />
+              <textarea value={form.message} onChange={set('message')} placeholder='"Tell me about it…"' disabled={sending} />
               <span className="err">{errors.message || ''}</span>
             </label>
-            <button type="submit" className="ide-exec" data-cursor-hover>
-              <span className="ide-exec-l">~/send_message.sh</span>
+            <button type="submit" className="ide-exec" data-cursor-hover disabled={sending}>
+              <span className="ide-exec-l">{sending ? '~/sending…' : '~/send_message.sh'}</span>
               <span className="ide-exec-r" aria-hidden="true">→</span>
             </button>
             <div className="ide-foot">
               {sent
                 ? <span className="sent">{contact.successMessage}</span>
+                : serverError
+                ? <span className="err">{serverError}</span>
                 : <span className="note">{contact.formNote}</span>
               }
             </div>

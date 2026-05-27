@@ -981,64 +981,85 @@ body[data-dark='true'] .cli-pill {
   .cli-blink { animation: none }
 }
 
-/* ─── Mobile FAB nav ─────────────────────────────────────────── */
-.mob-fab-root {
+/* ─── Mobile Nav Dock ────────────────────────────────────────── */
+.mob-dock {
   display: none;
   position: fixed;
-  bottom: 20px;
+  bottom: 24px;
   left: 50%;
   transform: translateX(-50%);
   z-index: 60;
   flex-direction: column;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
-@media (max-width: 768px) { .mob-fab-root { display: flex } }
+@media (max-width: 768px) { .mob-dock { display: flex } }
 
-.mob-fab-menu {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 7px;
-  margin-bottom: 2px;
+/* Menu panel */
+.mob-dock-menu {
+  background: color-mix(in srgb, var(--bg) 84%, transparent);
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--fg) 11%, transparent);
+  border-radius: 16px;
+  padding: 6px;
+  display: flex; flex-direction: column; gap: 2px;
+  min-width: 168px;
+  box-shadow:
+    0 16px 48px -8px rgba(0, 0, 0, 0.32),
+    0 0 0 1px color-mix(in srgb, var(--accent) 14%, transparent);
+  transform-origin: bottom center;
 }
-.mob-fab-item {
-  display: flex; align-items: center; justify-content: center;
-  min-width: 108px; padding: 9px 22px; border-radius: 999px;
-  background: color-mix(in srgb, var(--bg) 80%, transparent);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  backdrop-filter: blur(14px) saturate(160%);
-  border: 1px solid color-mix(in srgb, var(--accent) 22%, var(--rule));
+.mob-dock-link {
+  display: flex; align-items: center;
+  padding: 11px 16px; border-radius: 10px;
   font-family: var(--mono); font-size: 11px; letter-spacing: 0.1em;
   text-transform: uppercase; color: var(--muted);
-  text-decoration: none; cursor: pointer; appearance: none;
-  transition: color 0.2s, border-color 0.2s, background 0.2s, box-shadow 0.2s;
+  text-decoration: none; cursor: pointer;
+  transition: color 0.15s, background 0.15s;
 }
-.mob-fab-item.is-active {
-  color: var(--fg); border-color: var(--accent);
+.mob-dock-link.is-active {
+  color: var(--accent);
   background: color-mix(in srgb, var(--accent) 10%, transparent);
-  box-shadow: 0 0 12px -4px color-mix(in srgb, var(--accent) 50%, transparent);
 }
 
-.mob-fab-btn {
-  position: relative;
-  width: 46px; height: 46px; border-radius: 999px;
-  display: flex; align-items: center; justify-content: center;
+/* The 3-button pill bar */
+.mob-dock-bar {
+  display: flex; align-items: center;
   background: color-mix(in srgb, var(--bg) 78%, transparent);
-  -webkit-backdrop-filter: blur(14px) saturate(160%);
-  backdrop-filter: blur(14px) saturate(160%);
-  border: 1px solid color-mix(in srgb, var(--accent) 32%, var(--rule));
-  color: var(--fg); font-size: 20px; cursor: pointer; appearance: none;
+  -webkit-backdrop-filter: blur(22px) saturate(180%);
+  backdrop-filter: blur(22px) saturate(180%);
+  border: 1px solid color-mix(in srgb, var(--fg) 12%, transparent);
+  border-radius: 999px;
+  padding: 5px 6px;
   box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.14),
-    0 0 0 1px color-mix(in srgb, var(--accent) 18%, transparent),
-    0 0 22px -6px color-mix(in srgb, var(--accent) 55%, transparent);
-  transition: border-color 0.2s, box-shadow 0.3s;
+    0 8px 32px rgba(0, 0, 0, 0.20),
+    0 0 0 1px color-mix(in srgb, var(--accent) 14%, transparent),
+    0 0 32px -8px color-mix(in srgb, var(--accent) 42%, transparent);
 }
-.mob-fab-btn.is-open {
-  border-color: color-mix(in srgb, var(--accent) 52%, var(--rule));
-  box-shadow:
-    0 8px 24px rgba(0, 0, 0, 0.18),
-    0 0 0 1px color-mix(in srgb, var(--accent) 28%, transparent),
-    0 0 28px -4px color-mix(in srgb, var(--accent) 65%, transparent);
+
+/* Individual buttons */
+.mob-dock-btn {
+  min-width: 48px; min-height: 44px;
+  display: flex; align-items: center; justify-content: center; gap: 7px;
+  padding: 0 14px; border-radius: 999px;
+  background: transparent; border: none; cursor: pointer; appearance: none;
+  color: var(--muted);
+  transition: color 0.2s, background 0.2s;
+}
+.mob-dock-btn:active,
+.mob-dock-btn.is-open { color: var(--fg) }
+
+.mob-dock-menu-btn { padding: 0 16px }
+
+.mob-dock-label {
+  font-family: var(--mono); font-size: 10.5px;
+  letter-spacing: 0.12em; text-transform: uppercase;
+}
+
+/* Divider between buttons */
+.mob-dock-sep {
+  width: 1px; height: 18px; flex-shrink: 0;
+  background: color-mix(in srgb, var(--fg) 10%, transparent);
+  margin: 0 1px;
 }

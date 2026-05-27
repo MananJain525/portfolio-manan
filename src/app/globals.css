@@ -208,8 +208,8 @@ body[data-dark='true'] .eyebrow .eyebrow-avail .pulse { background: #a3e635 }
 /* ─── Display name ───────────────────────────────────────────── */
 .display {
   font-family: var(--serif); font-weight: 400;
-  font-size: clamp(23px, 5.2vw, 85px);
-  line-height: 0.86; letter-spacing: -0.02em;
+  font-size: clamp(46px, 6.5vw, 88px);
+  line-height: 0.85; letter-spacing: -0.025em;
   margin: 24px 0 0;
   white-space: nowrap;
 }
@@ -249,10 +249,10 @@ body:not([data-dark='true']) .hero-bio { color: rgba(17, 17, 17, 0.75) }
 .hero-inner {
   position: relative; z-index: 2;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: 1.1fr 1fr;
   grid-template-areas: "text cards";
   align-items: center;
-  gap: clamp(36px, 5vw, 72px);
+  gap: clamp(32px, 4vw, 56px);
   padding-top: clamp(14px, 2dvh, 28px);
   padding-bottom: clamp(28px, 4dvh, 56px);
 }
@@ -833,6 +833,12 @@ body[data-dark='true'] .footnav {
     padding-top: clamp(28px, 6dvh, 52px);
     padding-bottom: 32px;
     gap: 40px;
+  }
+  .hero-text {
+    min-height: 85svh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
   }
   .sc-wrapper { justify-self: center }
 

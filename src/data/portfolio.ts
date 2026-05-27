@@ -25,7 +25,7 @@ export const portfolio = {
   nameSuffix: 'JAIN.',
 
   eyebrow: {
-    school: 'BITS PILANI GOA · CLASS OF 2027',
+    school: '— NATIVE BUILDER',
     availability: 'AVAILABLE · SUMMER \'26',
   },
 

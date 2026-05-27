@@ -70,6 +70,9 @@ export function Hero() {
         {/* Left col: stacked cards (placed left via grid-area) */}
         <StackedCards />
       </div>
+
+      {/* Bottom grid-line — aligns with the 64px editorial background grid */}
+      <div className="hero-rule" aria-hidden="true" />
     </section>
   );
 }

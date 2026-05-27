@@ -144,17 +144,8 @@ body[data-dark='true'] .eyebrow .eyebrow-avail .pulse { background: #a3e635 }
 }
 
 /* ─── Hero ───────────────────────────────────────────────────── */
-.hero { position: relative; overflow: hidden; padding-top: clamp(10px, 1.5vw, 20px); padding-bottom: 64px; }
-
-/* Subtle bottom divider — sits flush at the hero base, aligning with
-   the 64 px editorial background grid and separating from the marquee. */
-.hero-rule {
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 1px;
-  background: var(--rule);
-  pointer-events: none;
-}
+/* padding-bottom = 2 × 64px grid cell: 64px footnav clearance + 64px breathing room */
+.hero { position: relative; overflow: hidden; padding-top: clamp(10px, 1.5vw, 20px); padding-bottom: 128px; }
 
 .hero-canvas {
   position: absolute; inset: 0; width: 100%; height: 100%;
@@ -470,14 +461,15 @@ body[data-dark='true'] .glass-panel { background: color-mix(in srgb, var(--card)
 }
 .gh60-cell {
   border-radius: 3px;
-  background: #262626;       /* empty — bg-[#262626] */
+  background: #262626; /* empty */
   transition: transform 0.12s, opacity 0.12s;
 }
-/* purple-900 / purple-700 / purple-500 per Tailwind */
-.gh60-cell[data-lvl='1'] { background: #4c1d95 }                                               /* low    */
-.gh60-cell[data-lvl='2'] { background: #6d28d9 }                                               /* medium */
-.gh60-cell[data-lvl='3'],
-.gh60-cell[data-lvl='4'] { background: #8b5cf6; box-shadow: 0 0 6px rgba(139,92,246,0.5) }    /* high   */
+/* Exact color-mix scale from the original 365-day graph — adapts to var(--accent).
+   Dark mode: --accent = #A855F7 → vivid neon purples. */
+.gh60-cell[data-lvl='1'] { background: color-mix(in srgb, var(--accent) 38%, transparent) }
+.gh60-cell[data-lvl='2'] { background: color-mix(in srgb, var(--accent) 58%, transparent) }
+.gh60-cell[data-lvl='3'] { background: color-mix(in srgb, var(--accent) 80%, transparent); box-shadow: 0 0 6px color-mix(in srgb, var(--accent) 55%, transparent) }
+.gh60-cell[data-lvl='4'] { background: var(--accent); box-shadow: 0 0 8px color-mix(in srgb, var(--accent) 70%, transparent), 0 0 16px color-mix(in srgb, var(--accent) 35%, transparent) }
 @media (hover: hover) { .gh60-cell:hover { transform: scale(1.3); opacity: 0.9; z-index: 2 } }
 
 /* ─── Skill pills ────────────────────────────────────────────── */
